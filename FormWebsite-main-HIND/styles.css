@@ -125,6 +125,62 @@ textarea::placeholder {
     background-color: #555;
 }
 
+/* Captcha Styles */
+#captchaContainer {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+#captchaCanvas {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    background: white;
+}
+
+#captchaInput {
+    padding: 8px 12px;
+    margin: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    width: 200px;
+}
+
+#refreshCaptcha {
+    background: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 8px 15px;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 5px;
+}
+
+#verifyCaptcha {
+    background: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 5px;
+}
+
+#verifyCaptcha:hover {
+    background: #45a049;
+}
+
+#captchaMessage {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
 /* Animations */
 @keyframes bounce {
     0%, 100% {
