@@ -1,6 +1,5 @@
 package com.example.ChatAi.ChatAi;
 
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -134,10 +133,10 @@ public class AiService {
         return null;
     }
 
- public String saveField(FieldEntity fieldEntity){
-     repository.save(fieldEntity);
-     return "Form saved successfully! Share this link: http://localhost:8080/form/" + fieldEntity.getFormName();
- }
+    public String saveField(FieldEntity fieldEntity){
+        repository.save(fieldEntity);
+        return "Form saved successfully! Share this link: http://localhost:8080/form/" + fieldEntity.getFormName();
+    }
 
     public FieldEntity findByformName(String formname) {
         List<FieldEntity> forms = repository.findAll();
@@ -170,43 +169,24 @@ public class AiService {
     }
 
     public String saveUserResponses(String formName, String responsesJson) {
-        // Sanitize form name to create a valid table name
-        String sanitizedTableName = sanitizeTableName(formName);
-
         try {
-            // Parse responses JSON
-            JSONObject responses = new JSONObject(responsesJson);
+            // Validate the JSON format
+            new JSONObject(responsesJson); // This will throw if invalid JSON
 
-            // Prepare SQL insert statement dynamically
-            List<String> columns = new ArrayList<>();
-            List<Object> values = new ArrayList<>();
-
-            for (String key : responses.keySet()) {
-                columns.add(key);
-
-                // Convert checkbox "on" values to boolean TRUE for MySQL
-                Object value = responses.get(key);
-                if (value instanceof String && "on".equals(value)) {
-                    value = true;
-                }
-
-                values.add(value);
+            // Find the form
+            Optional<FieldEntity> formOptional = repository.findByFormName(formName);
+            if (!formOptional.isPresent()) {
+                return "Error: Form not found with name: " + formName;
             }
 
-            // Rest of the method remains the same...
-            String columnNames = columns.stream()
-                    .map(this::sanitizeColumnName)
-                    .collect(Collectors.joining(", "));
+            // Update the form's responses
+            FieldEntity form = formOptional.get();
+            form.setResponsesJson(responsesJson);
+            repository.save(form);
 
-            String placeholders = columns.stream()
-                    .map(col -> "?")
-                    .collect(Collectors.joining(", "));
-
-            String insertQuery = String.format("INSERT INTO `%s` (%s) VALUES (%s)",
-                    sanitizedTableName, columnNames, placeholders);
-
-            // Execute the insert
-            jdbcTemplate.update(insertQuery, values.toArray());
+            System.out.println("//////////////////////////////////////////");
+            System.out.println("Responses JSON: " + responsesJson);
+            System.out.println("//////////////////////////////////////////");
 
             return "User responses saved successfully!";
         } catch (Exception e) {
@@ -297,11 +277,4 @@ public class AiService {
         }
     }
 
-    
-
 }
-
-
-
-
-
