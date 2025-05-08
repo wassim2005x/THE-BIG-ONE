@@ -44,12 +44,13 @@ body {
     margin: 5%;
   }
 
-
+    
 
   
   h1 {
     margin-bottom: 20px;
-    font-size: 24px;
+    font-family: 'Comic Neue', cursive;
+    font-size: 3rem;
     color: var(--text-color);
   }
   
