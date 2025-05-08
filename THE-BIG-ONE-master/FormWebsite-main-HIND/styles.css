@@ -1,0 +1,250 @@
+/*=========================
+    Variables & Themes
+=========================*/
+:root {
+    --base-color: #f9f9fb;
+    --text-color: #1e1e2f;
+    --primary-color: #4b6ef5;
+    --card-bg: #e9ecf2;
+  }
+  .darkmode {
+    --base-color: #1a1c2c;
+    --text-color: #f1f1f1;
+    --primary-color: #90a0f0;
+    --card-bg: #23263a;
+  }
+  .button-container{
+    margin-bottom: 50px;
+    margin-left: 20px;
+  }
+  /*=========================
+      General Reset & Layout
+  =========================*/
+  body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--base-color);
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .homepage,
+  .ai-form-page {
+    background: var(--base-color);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    width: 100%;
+    text-align: center;
+  }
+  
+  /*=========================
+      Header Section
+  =========================*/
+  .header h1 {
+    font-family: 'Comic Neue', cursive;
+    font-size: 3rem;
+    color: var(--text-color);
+    margin-bottom: 10px;
+  }
+  
+  .header p {
+    font-size: 1.2rem;
+    color: #3a435d;
+    margin-bottom: 30px;
+  }
+  
+  /*=========================
+      Theme Switch
+  =========================*/
+  #theme-switch {
+    height: 50px;
+    width: 50px;
+    padding: 0;
+    border-radius: 50%;
+    background-color: var(--base-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  #theme-switch svg {
+    fill: var(--primary-color);
+  }
+  
+  #theme-switch svg:last-child {
+    display: none;
+  }
+  
+  .darkmode #theme-switch svg:first-child {
+    display: none;
+  }
+  
+  .darkmode #theme-switch svg:last-child {
+    display: block;
+  }
+  
+  /*=========================
+      Options Section
+  =========================*/
+  .options {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+  }
+  
+  .option-card {
+    background: var(--card-bg);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    color: var(--text-color);
+    text-decoration: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    flex: 1;
+    max-width: 300px;
+  }
+  
+  .option-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    filter: brightness(1.05) drop-shadow(0 0 8px rgba(75, 110, 245, 0.3));
+  }
+  
+  .option-card .icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    animation: float 3s infinite;
+  }
+  
+  .option-card h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+  
+  .option-card p {
+    font-size: 1rem;
+    color: #777;
+  }
+  
+  /*=========================
+      Buttons
+  =========================*/
+  button,
+  .button,
+  .fetchFormButton {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  button:hover,
+  .button:hover,
+  .fetchFormButton:hover {
+    background-color: #3a53cc;
+    transform: scale(1.05);
+  }
+  
+  button:focus,
+  .button:focus,
+  .fetchFormButton:focus {
+    outline: 2px solid #3a53cc;
+  }
+  
+  /* Specific Buttons */
+  .back-button {
+    margin-top: 20px;
+    background-color: #777;
+  }
+  
+  .back-button:hover {
+    background-color: #555;
+  }
+  
+  /*=========================
+      Form & Textarea
+  =========================*/
+  #ai-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  textarea {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #ff6f61;
+    border-radius: 10px;
+    font-size: 1rem;
+    resize: vertical;
+    min-height: 150px;
+    background: #fff;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  textarea::placeholder {
+    color: #999;
+  }
+  
+  /*=========================
+      Captcha Section
+  =========================*/
+  #captchaContainer {
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  #captchaCanvas {
+    margin-bottom: 10px;
+  }
+  
+  #captchaInput {
+    margin-bottom: 10px;
+    background-color: var(--base-color);
+    color: var(--text-color);
+    border: 1px solid #ccc;
+    padding: 8px;
+    border-radius: 5px;
+  }
+  
+  #refreshCaptcha,
+  #verifyCaptcha {
+    margin-bottom: 10px;
+  }
+  
+  /*=========================
+      Animations
+  =========================*/
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  

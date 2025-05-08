@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>All Form Data</title>
+    <link rel="stylesheet" href="styles.css"/>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #121212; /* Dark background */
+            color: #ffffff; /* White text */
+            margin: 0;
+            padding: 20px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+            background: #1e1e1e; /* Slightly lighter background for the container */
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+            animation: fadeIn 1s ease-in-out; /* Animation for heading */
+        }
+
+        .form-section {
+            margin-bottom: 40px;
+            border-radius: 8px;
+            overflow: hidden;
+            background: #2a2a2a; /* Darker section background */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s, box-shadow 0.3s; /* Animation for hover effect */
+        }
+
+        .form-section:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+        }
+
+        .form-section h2 {
+            background: #333; /* Dark gray background for title */
+            color: #ffffff; /* White text */
+            padding: 15px;
+            margin: 0;
+            font-size: 1.5rem;
+            text-align: center;
+            border-bottom: 2px solid #444; /* Slightly lighter border */
+        }
+
+        .table-container {
+            overflow-x: auto; /* Enable horizontal scrolling */
+            margin: 10px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 600px; /* Minimum width to ensure horizontal scrolling */
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #444; /* Darker border for table */
+        }
+
+        th {
+            background-color: #444; /* Dark gray for header */
+            color: #ffffff; /* White text */
+        }
+
+        tr:hover {
+            background-color: #555; /* Slightly lighter gray on hover */
+        }
+
+        .no-data {
+            text-align: center;
+            padding: 20px;
+            color: #bbb; /* Light gray for no data message */
+            font-style: italic;
+        }
+
+        a {
+            color: #4CAF50; /* Green color for links */
+            text-decoration: none; /* Remove underline */
+        }
+
+        a:hover {
+            text-decoration: underline; /* Underline on hover */
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            th, td {
+                padding: 8px;
+                font-size: 14px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .form-section h2 {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>All Form Data</h1>
+        <div id="formDataContainer">
+            <!-- Tables will be populated here -->
+        </div>
+        <div id="chatbotToggle" style="position: fixed; bottom: 25px; right: 25px; z-index: 1000;">
+            <button onclick="toggleChatbot()" style="background-color: #4CAF50; color: white; border: none; border-radius: 50%; width: 60px; height: 60px; font-size: 24px; cursor: pointer; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);">
+                💬
+            </button>
+        </div>
+        
+        <!-- Floating Chatbot Panel -->
+        <div id="chatbotSection" style="display: none; position: fixed; bottom: 100px; right: 25px; width: 320px; background: #2c2c2c; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.4); z-index: 1000; overflow: hidden;">
+            <div style="background-color: #4CAF50; padding: 10px; color: white; font-weight: bold; text-align: center;">
+                AI Assistant
+                <span onclick="toggleChatbot()" style="float: right; cursor: pointer;">&times;</span>
+            </div>
+            <div id="chatWindow" style="padding: 15px; height: 250px; overflow-y: auto; background-color: #1b1b1b; color: white; font-size: 14px;"></div>
+            <div style="display: flex; border-top: 1px solid #444;">
+                <input id="chatInput" type="text" placeholder="Type your message..." style="flex: 1; padding: 10px; border: none; background: #2e2e2e; color: white; outline: none;"/>
+                <button onclick="sendMessage()" style="padding: 10px 16px; background-color: #4CAF50; color: white; border: none; cursor: pointer;">Send</button>
+            </div>
+        </div>
+        
+    </div>
+    <script>
+        function toggleChatbot() {
+            const chatbot = document.getElementById('chatbotSection');
+            chatbot.style.display = (chatbot.style.display === 'none' || chatbot.style.display === '') ? 'block' : 'none';
+        }
+    
+        function appendMessage(sender, text) {
+            const chatWindow = document.getElementById('chatWindow');
+            const messageDiv = document.createElement('div');
+            messageDiv.innerHTML = `<strong>${sender}:</strong> ${text}`;
+            messageDiv.style.marginBottom = '10px';
+            chatWindow.appendChild(messageDiv);
+            chatWindow.scrollTop = chatWindow.scrollHeight;
+        }
+    
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            if (!message) return;
+    
+            appendMessage("You", message);
+            input.value = "";
+    
+            fetch("http://localhost:8080/chat", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ chat: message })
+            })
+            .then(response => response.text())
+            .then(reply => {
+                appendMessage("AI", reply);
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                appendMessage("AI", "Oops! Something went wrong.");
+            });
+        }
+    </script>
+        
+    <script>
+        fetch('http://localhost:8080/all-form-data')
+            .then(response => response.json())
+            .then(data => {
+                const container = document.getElementById('formDataContainer');
+                data.forEach(form => {
+                    const formSection = document.createElement('div');
+                    formSection.classList.add('form-section');
+
+                    const formTitle = document.createElement('h2');
+                    formTitle.textContent = form.formName;
+                    formSection.appendChild(formTitle);
+
+                    const tableContainer = document.createElement('div');
+                    tableContainer.classList.add('table-container'); // Add table container for scrolling
+
+                    const table = document.createElement('table');
+                    const thead = document.createElement('thead');
+                    const tbody = document.createElement('tbody');
+
+                    // Create table headers dynamically based on the first data entry
+                    if (form.data.length > 0) {
+                        const headers = Object.keys(form.data[0]);
+                        const headerRow = document.createElement('tr');
+                        headers.forEach(header => {
+                            const th = document.createElement('th');
+                            th.textContent = header;
+                            headerRow.appendChild(th);
+                        });
+                        thead.appendChild(headerRow);
+
+                        // Populate table rows
+                        form.data.forEach(row => {
+                            const dataRow = document.createElement('tr');
+                            headers.forEach(header => {
+                                const td = document.createElement('td');
+                                // Check if the header is for the PDF link
+                                if (header === 'pdfPath') { // Assuming 'pdfPath' is the key for PDF links
+                                    const link = document.createElement('a');
+                                    link.href = row[header]; // Set the link to the PDF path
+                                    link.download = ''; // This attribute prompts the browser to download the file
+                                    link.textContent = 'Download/View PDF'; // Link text
+                                    td.appendChild(link);
+                                } else {
+                                    td.textContent = row[header]; // Regular data
+                                }
+                                dataRow.appendChild(td);
+                            });
+                            tbody.appendChild(dataRow);
+                        });
+                    } else {
+                        const noDataRow = document.createElement('tr');
+                        const noDataCell = document.createElement('td');
+                        noDataCell.colSpan = 100; // Adjust based on the number of columns
+                        noDataCell.classList.add('no-data');
+                        noDataCell.textContent = 'No data available';
+                        noDataRow.appendChild(noDataCell);
+                        tbody.appendChild(noDataRow);
+                    }
+
+                    table.appendChild(thead);
+                    table.appendChild(tbody);
+                    tableContainer.appendChild(table); // Append table to the container
+                    formSection.appendChild(tableContainer); // Append container to the form section
+                    container.appendChild(formSection);
+                });
+            })
+            .catch(error => console.error('Error fetching all form data:', error));
+    </script>
+</body>
+</html>
+
+
+
+
