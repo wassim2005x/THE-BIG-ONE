@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>All Form Data</title>
     <link rel="stylesheet" href="styles.css"/>
+    <!-- Load SheetJS from CDN first -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <style>
         body {
             font-family: 'Poppins', sans-serif;
@@ -45,14 +47,47 @@
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
         }
 
-        .form-section h2 {
+        .form-header {
             background: #333; /* Dark gray background for title */
             color: #ffffff; /* White text */
             padding: 15px;
             margin: 0;
-            font-size: 1.5rem;
-            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             border-bottom: 2px solid #444; /* Slightly lighter border */
+        }
+
+        .form-header h2 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        .download-btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-weight: bold;
+            font-size: 14px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+
+        .download-btn:hover {
+            background-color: #3e8e41;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+        }
+
+        .download-btn:disabled {
+            background-color: #666;
+            cursor: not-allowed;
         }
 
         .table-container {
@@ -97,6 +132,12 @@
             text-decoration: underline; /* Underline on hover */
         }
 
+        .table-checkbox {
+            transform: scale(1.2);
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -121,6 +162,7 @@
             }
         }
     </style>
+    <!-- SheetJS library already loaded at the top -->
 </head>
 <body>
     <div class="container">
@@ -187,25 +229,89 @@
                 appendMessage("AI", "Oops! Something went wrong.");
             });
         }
+
+        // Function to export table to Excel
+        function exportTableToExcel(tableId, formName) {
+            const table = document.getElementById(tableId);
+            if (!table) {
+                console.error(`Table with ID ${tableId} not found`);
+                alert('Could not find table to export');
+                return;
+            }
+
+            try {
+                console.log(`Exporting table: ${tableId} for form: ${formName}`);
+                
+                // Create a workbook
+                const wb = XLSX.utils.book_new();
+                
+                // Convert table to worksheet
+                const ws = XLSX.utils.table_to_sheet(table);
+                
+                // Add worksheet to workbook
+                XLSX.utils.book_append_sheet(wb, ws, formName);
+                
+                // Generate Excel file and trigger download
+                XLSX.writeFile(wb, `${formName}_data.xlsx`);
+                
+                console.log('Excel export completed');
+            } catch (error) {
+                console.error('Error exporting to Excel:', error);
+                alert('Error exporting to Excel: ' + error.message);
+            }
+        }
     </script>
         
     <script>
-        fetch('http://localhost:8080/all-form-data')
-            .then(response => response.json())
-            .then(data => {
-                const container = document.getElementById('formDataContainer');
-                data.forEach(form => {
-                    const formSection = document.createElement('div');
-                    formSection.classList.add('form-section');
+        // Wait for DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            loadFormData();
+        });
 
-                    const formTitle = document.createElement('h2');
-                    formTitle.textContent = form.formName;
-                    formSection.appendChild(formTitle);
+        function loadFormData() {
+            fetch('http://localhost:8080/all-form-data')
+                .then(response => response.json())
+                .then(data => {
+                    const container = document.getElementById('formDataContainer');
+                    container.innerHTML = ''; // Clear container first
+                    
+                    if (data.length === 0) {
+                        container.innerHTML = '<div class="no-data">No form data available</div>';
+                        return;
+                    }
+                    
+                    data.forEach((form, index) => {
+                        const formSection = document.createElement('div');
+                        formSection.classList.add('form-section');
+
+                        // Create header with title and download button
+                        const formHeader = document.createElement('div');
+                        formHeader.classList.add('form-header');
+
+                        const formTitle = document.createElement('h2');
+                        formTitle.textContent = form.formName;
+                        
+                        // Create download button - make it more prominent
+                        const downloadBtn = document.createElement('button');
+                        downloadBtn.id = `download-btn-${index}`;
+                        downloadBtn.classList.add('download-btn');
+                        downloadBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg> Download Excel';
+                        downloadBtn.disabled = form.data.length === 0;
+                        
+                        // Add event listener to the download button
+                        downloadBtn.onclick = function() {
+                            exportTableToExcel(`table-${index}`, form.formName);
+                        };
+
+                        formHeader.appendChild(formTitle);
+                        formHeader.appendChild(downloadBtn);
+                        formSection.appendChild(formHeader);
 
                     const tableContainer = document.createElement('div');
-                    tableContainer.classList.add('table-container'); // Add table container for scrolling
+                    tableContainer.classList.add('table-container');
 
                     const table = document.createElement('table');
+                    table.id = `table-${index}`;
                     const thead = document.createElement('thead');
                     const tbody = document.createElement('tbody');
 
@@ -251,16 +357,13 @@
 
                     table.appendChild(thead);
                     table.appendChild(tbody);
-                    tableContainer.appendChild(table); // Append table to the container
-                    formSection.appendChild(tableContainer); // Append container to the form section
+                    tableContainer.appendChild(table);
+                    formSection.appendChild(tableContainer);
                     container.appendChild(formSection);
                 });
             })
             .catch(error => console.error('Error fetching all form data:', error));
+        }
     </script>
 </body>
 </html>
-
-
-
-
