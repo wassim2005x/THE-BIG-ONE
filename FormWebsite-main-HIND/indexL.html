@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI form- Find Your Perfect Forms</title>
+    <link rel="stylesheet" href="stylesL.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="LogoStyle.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg" href="./logo_svg.svg">
+    <style>
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;              
+            pointer-events: none;    
+        }
+
+        #particles-js canvas {
+            width: 100%;
+            height: 100%;
+            pointer-events: auto;     
+        }
+        
+        /* Make sure content appears above particles */
+        header, main, footer, .cookie-consent-banner {
+            position: relative;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Particles.js container -->
+    <div id="particles-js"></div>
+    
+    <!-- Floating purple accents -->
+    <div class="purple-accent accent-1"></div>
+    <div class="purple-accent accent-2"></div>
+    <div class="purple-accent accent-3"></div>
+    
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container bento-card">
+                <!-- Logo -->
+                <a href="#" class="logo">
+                    <div class="logo-image-container">
+                        <!-- Replace the image tags with inline SVG that changes with theme -->
+                        <svg viewBox="0 0 200 50" xmlns="http://www.w3.org/2000/svg" class="logo-image">
+                            <!-- Main text -->
+                            <text x="10" y="35" font-family="Inter, sans-serif" font-weight="700" font-size="28" class="logo-text">Form<tspan class="logo-accent">Ai</tspan></text>
+                            
+                            <!-- Form icon -->
+                            <g transform="translate(155, 25) scale(0.6)">
+                                <rect x="-15" y="-20" width="40" height="40" rx="5" fill="none" class="logo-stroke" stroke-width="3"/>
+                                <line x1="-5" y1="-5" x2="15" y2="-5" class="logo-stroke" stroke-width="2"/>
+                                <line x1="-5" y1="5" x2="15" y2="5" class="logo-stroke" stroke-width="2"/>
+                                <line x1="-5" y1="-15" x2="15" y2="-15" class="logo-stroke" stroke-width="2"/>
+                            </g>
+                            
+                            <!-- AI circuit pattern -->
+                            <g transform="translate(175, 25)">
+                                <circle cx="0" cy="0" r="10" class="logo-accent-bg"/>
+                                <path d="M-5,-5 L5,5 M-5,5 L5,-5" stroke="white" stroke-width="2"/>
+                                <circle cx="0" cy="0" r="3" fill="white"/>
+                            </g>
+                        </svg>
+                    </div>
+                </a>
+                <!-- Menu principal -->
+                <div class="menu-items">
+                    <a href="#works" class="menu-item">How it works</a>
+                    <a href="#workspace" class="menu-item">Workspace</a>
+                </div>
+
+                <!-- Auth & Theme -->
+                <div class="nav-right">
+                    <a href="./index.html" class="get-started-btn">Get started</a>
+                    <label class="switch">
+                        <input type="checkbox" id="themeToggle">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button class="hamburger-menu" aria-label="Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div class="mobile-menu">
+                <div class="mobile-menu-content">
+                    <a href="#works" class="mobile-menu-item">How it works</a>
+                    <a href="#workspace" class="mobile-menu-item">Workspace</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-dark">
+            <div class="hero-background">
+                <div class="circuit-lines"></div>
+                <div class="circuit-pattern bottom-left"></div>
+                <div class="circuit-pattern bottom-right"></div>
+            </div>
+            <div class="sphere-container">
+                <div class="sphere-animation">
+                    <div class="sphere-particles"></div>
+                </div>
+            </div>
+            <div class="hero-content-wrapper">
+                <div class="hero-badge">
+                    <i class="fas fa-rocket"></i> Find Your Future
+                </div>
+                <h1>Making forms got you confused? <br><span>Time for generating ai form</span></h1>
+                <p>
+                    We use AI and smart templates to generate beautiful, functional forms—so you can focus on what matters. <br>
+                    Perfect for developers, teams, and businesses that value speed and simplicity
+                </p>
+                <div class="cta-buttons">
+                    <a href="./index.html" class="cta-button animated">Get Started Today</a>
+                </div>
+                <!-- Scroll Icon -->
+                <div class="scroll-down-container">
+                    <div class="scroll-down-icon">
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <span class="scroll-text">Scroll Down</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works -->
+        <section class="how-it-works" id="works">
+            <div class="container">
+                <div class="section-header centered reveal">
+                    <h2>How AI form Works</h2>
+                    <p>Create forms in minutes, not hours</p>
+                </div>
+                <div class="steps-container">
+                    <div class="step-item reveal delay-1">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <div class="step-icon">
+                                <i class="fas fa-user-plus"></i>
+                            </div>
+                            <h3>Choose or Describe</h3>
+                            <p>Select a standard template or describe your form in natural language—we'll take it from there.</p>
+                        </div>
+                    </div>
+                    <div class="step-item reveal delay-2">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <div class="step-icon">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <h3>AI Builds Your Form</h3>
+                            <p>Our AI engine generates a fully functional, customizable form in seconds.</p>
+                        </div>
+                    </div>
+                    <div class="step-item reveal delay-3">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <div class="step-icon">
+                                <i class="fas fa-paper-plane"></i>
+                            </div>
+                            <h3>Integrate and Launch</h3>
+                            <p>Export your form or embed it directly into your app, site, or workflow.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Collaborative Workspace Section -->
+        <section class="workspace-section" id="workspace">
+            <div class="container">
+                <div class="section-header centered reveal">
+                    <h2>Our Collaborative Network</h2>
+                    <p>Skilled pilots managing your accounts so you don't have to</p>
+                </div>
+
+                <div class="collab-network-wrapper">
+                    <div class="hub-center">
+                        <div class="hub-app-icon">
+                            <img src="https://i.pinimg.com/736x/ae/58/86/ae5886e210b0c07359f9596a4a1d00d1.jpg" alt="usthb logo">
+                            <div class="teacher-info">
+                                <p class="teacher-name">Prof. gendouz</p>
+                                <span class="teacher-title">Course Director</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="profile-connections">
+                        <!-- Existing Profile Cards -->
+                        <div class="profile-card top-left">
+                            <div class="profile-picture">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="profile-info">
+                                <p class="profile-name">Daoudi Wassim</p>
+                                <span class="profile-title">Wix Developer</span>
+                            </div>
+                        </div>
+                        
+                        <div class="profile-card top-right">
+                            <div class="profile-picture">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="profile-info">
+                                <p class="profile-name">BOUTMEDJET Abd elmoudjib</p>
+                                <span class="profile-title">Back-end Developer</span>
+                            </div>
+                        </div>
+                        
+                        <div class="profile-card bottom-left">
+                            <div class="profile-picture">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="profile-info">
+                                <p class="profile-name">KACI Hind</p>
+                                <span class="profile-title">Developer</span>
+                            </div>
+                        </div>
+                        
+                        <div class="profile-card bottom-right">
+                            <div class="profile-picture">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="profile-info">
+                                <p class="profile-name">Hamek Mohamed</p>
+                                <span class="profile-title">Programmer</span>
+                            </div>
+                        </div>
+
+                        <!-- New Profile Cards -->
+                        <div class="profile-card mid-top">
+                            <div class="profile-picture">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="profile-info">
+                                <p class="profile-name">Lisri Akram</p>
+                                <span class="profile-title">Front-end Developer</span>
+                            </div>
+                        </div>
+
+                        <div class="profile-card bottom-mid">
+                            <div class="profile-picture">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="profile-info">
+                                <p class="profile-name">Boudjemia Farhat Youcef</p>
+                                <span class="profile-title">Back-end Developer</span>
+                            </div>
+                        </div>
+
+                        <!-- Connection Paths -->
+                        <div class="connection-path top-left"></div>
+                        <div class="connection-path top-right"></div>
+                        <div class="connection-path bottom-left"></div>
+                        <div class="connection-path bottom-right"></div>
+                        <div class="connection-path mid-top"></div>
+                        <div class="connection-path bottom-mid"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <div class="footer-logo">
+                        <div class="footer-logo-container">
+                            <!-- Same SVG format for consistency -->
+                            <svg viewBox="0 0 200 50" xmlns="http://www.w3.org/2000/svg" class="footer-logo-img">
+                                <!-- Main text -->
+                                <text x="10" y="35" font-family="Inter, sans-serif" font-weight="700" font-size="28" class="logo-text">Form<tspan class="logo-accent">Ai</tspan></text>
+                                
+                                <!-- Form icon -->
+                                <g transform="translate(155, 25) scale(0.6)">
+                                    <rect x="-15" y="-20" width="40" height="40" rx="5" fill="none" class="logo-stroke" stroke-width="3"/>
+                                    <line x1="-5" y1="-5" x2="15" y2="-5" class="logo-stroke" stroke-width="2"/>
+                                    <line x1="-5" y1="5" x2="15" y2="5" class="logo-stroke" stroke-width="2"/>
+                                    <line x1="-5" y1="-15" x2="15" y2="-15" class="logo-stroke" stroke-width="2"/>
+                                </g>
+                                
+                                <!-- AI circuit pattern -->
+                                <g transform="translate(175, 25)">
+                                    <circle cx="0" cy="0" r="10" class="logo-accent-bg"/>
+                                    <path d="M-5,-5 L5,5 M-5,5 L5,-5" stroke="white" stroke-width="2"/>
+                                    <circle cx="0" cy="0" r="3" fill="white"/>
+                                </g>
+                            </svg>
+                        </div>
+                    </div>
+                    <p>Connecting people with their dream internships since 2025.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>For Students</h3>
+                    <ul>
+                        <li>Browse Internships</li>
+                        <li>Career Resources</li>
+                        <li>Resume Builder</li>
+                        <li>Success Stories</li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>For Employers</h3>
+                    <ul>
+                        <li>Post an Internship</li>
+                        <li>Browse Candidates</li>
+                        <li>Employer Resources</li>
+                        <li>Success Stories</li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-envelope"></i> support@AIform.com</li>
+                        <li><i class="fas fa-phone"></i>00000000</li>
+                        <li><i class="fas fa-map-marker-alt"></i> 123 ai Drive, usthb</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 AIform. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="legal-mentions.html">Privacy Policy</a>
+                    <a href="legal-mentions.html">Terms of Service</a>
+                    <a href="cookie-policy.html">Cookies</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cookie Consent Banner -->
+    <div id="cookieConsentBanner" class="cookie-consent-banner">
+        <div class="cookie-consent-content">
+            <p>
+                We use cookies and similar technologies to enhance your browsing experience and provide personalized content. By clicking "Accept", you agree to our use of cookies and acknowledge our <a href="legal-mentions.html" target="_blank" class="cookie-link">Legal Mentions</a> and <a href="cookie-policy.html" target="_blank" class="cookie-link">Cookie Policy</a>.
+            </p>
+        </div>
+        <button id="acceptCookies" class="cookie-accept-btn">Accept</button>
+    </div>
+
+    <!-- Added particles.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    
+    <!-- Particles.js initialization -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Initialize particles
+            function loadParticles(color) {
+                if (window.pJSDom && window.pJSDom.length > 0) {
+                    window.pJSDom[0].pJS.fn.vendors.destroypJS();
+                    window.pJSDom = [];
+                }
+
+                particlesJS("particles-js", {
+                    particles: {
+                        number: { value: 80, density: { enable: true, value_area: 800 } },
+                        color: { value: color },
+                        shape: { type: "circle" },
+                        opacity: { value: 0.5, random: false },
+                        size: { value: 3, random: true },
+                        line_linked: {
+                            enable: true,
+                            distance: 150,
+                            color: color,
+                            opacity: 0.4,
+                            width: 1
+                        },
+                        move: {
+                            enable: true,
+                            speed: 2,
+                            direction: "none",
+                            random: false,
+                            straight: false,
+                            out_mode: "out",
+                            bounce: false
+                        }
+                    },
+                    interactivity: {
+                        detect_on: "canvas",
+                        events: {
+                            onhover: { enable: true, mode: "grab" },
+                            onclick: { enable: true, mode: "push" },
+                            resize: true
+                        },
+                        modes: {
+                            grab: { distance: 140, line_linked: { opacity: 1 } },
+                            push: { particles_nb: 4 }
+                        }
+                    },
+                    retina_detect: true
+                });
+            }
+
+            // Initial particle load - set to dark or light based on theme
+            const isDark = document.body.getAttribute('data-theme') === 'dark';
+            loadParticles(isDark ? "#ffffff" : "#6c63ff");
+            
+            // Update particles when theme changes
+            const themeToggle = document.getElementById('themeToggle');
+            if (themeToggle) {
+                themeToggle.addEventListener('change', function() {
+                    setTimeout(() => {
+                        const isDarkNow = document.body.getAttribute('data-theme') === 'dark';
+                        loadParticles(isDarkNow ? "#ffffff" : "#6c63ff");
+                    }, 100);
+                });
+            }
+        });
+    </script>
+    
+    <script src="scriptL.js"></script>
+</body>
+</html>

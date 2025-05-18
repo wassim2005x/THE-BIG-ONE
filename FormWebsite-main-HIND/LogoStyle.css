@@ -1,0 +1,74 @@
+/* Add these styles to your stylesL.css file */
+
+/* Logo styling */
+.logo-image {
+    height: 40px;
+    width: auto;
+    transition: all 0.3s ease;
+}
+
+/* Theme-specific logo coloring */
+html[data-theme="light"] .logo-text {
+    fill: #333;
+}
+
+html[data-theme="light"] .logo-stroke {
+    stroke: #333;
+}
+
+html[data-theme="light"] .logo-accent {
+    fill: #8A2BE2; /* Purple color for "Ai" part */
+}
+
+html[data-theme="light"] .logo-accent-bg {
+    fill: #8A2BE2;
+}
+
+html[data-theme="dark"] .logo-text {
+    fill: #fff;
+}
+
+html[data-theme="dark"] .logo-stroke {
+    stroke: #fff;
+}
+
+html[data-theme="dark"] .logo-accent {
+    fill: #BF7FF5; /* Lighter purple for dark mode */
+}
+
+html[data-theme="dark"] .logo-accent-bg {
+    fill: #BF7FF5;
+}
+
+/* Logo container */
+.logo-image-container {
+    display: flex;
+    align-items: center;
+}
+
+/* Add hover effect */
+.logo:hover .logo-image {
+    transform: scale(1.05);
+}
+/* Footer logo styling */
+.footer-logo-img {
+    height: 40px;
+    width: auto;
+    margin-bottom: 10px;
+}
+
+/* Footer logo specific theme adjustments */
+.footer .logo-text {
+    fill: #fff; /* White text in footer regardless of theme */
+}
+
+.footer .logo-stroke {
+    stroke: #fff;
+}
+
+/* Make the footer logo slightly smaller */
+.footer-logo-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
