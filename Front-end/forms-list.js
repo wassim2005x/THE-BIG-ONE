@@ -82,12 +82,25 @@ function generateCaptcha() {
         ctx.fillText(captchaText[i], 0, 0);
         ctx.restore();
     }
+
+    // Add noise
+    for (let i = 0; i < 50; i++) {
+        ctx.beginPath();
+        ctx.moveTo(Math.random() * canvas.width, Math.random() * canvas.height);
+        ctx.lineTo(Math.random() * canvas.width, Math.random() * canvas.height);
+        ctx.strokeStyle = '#ccc';
+        ctx.stroke();
+    }
 }
 
-// Call generateCaptcha on page load
+// Initialize captcha
 document.addEventListener('DOMContentLoaded', function() {
     generateCaptcha();
     
+    // Refresh captcha button
+    document.getElementById('refreshCaptcha').addEventListener('click', generateCaptcha);
+    
+    // Verify captcha button
     document.getElementById('verifyCaptcha').addEventListener('click', function() {
         const input = document.getElementById('captchaInput').value;
         const messageElement = document.getElementById('captchaMessage');
@@ -95,13 +108,13 @@ document.addEventListener('DOMContentLoaded', function() {
         if (input === captchaText) {
             messageElement.textContent = 'Captcha verified successfully!';
             messageElement.style.color = 'green';
-            // Redirect to forms-list.html
-            window.location.href = 'forms-list.html';
+            document.getElementById('formGeneratorContainer').style.display = 'block';
+            document.getElementById('captchaContainer').style.display = 'none';
         } else {
             messageElement.textContent = 'Incorrect captcha. Please try again.';
             messageElement.style.color = 'red';
-            generateCaptcha(); // Regenerate CAPTCHA
-            document.getElementById('captchaInput').value = ''; // Clear input
+            generateCaptcha();
+            document.getElementById('captchaInput').value = '';
         }
     });
 });
